@@ -10,7 +10,7 @@ class DependentDropdownController extends Controller
 {
     public function index()
     {
-        $provinces = Province::pluck('name', 'id');
+        $provinces = Province::pluck('name', 'code');
 
         return view('dependent-dropdown.index', [
             'provinces' => $provinces,
@@ -19,7 +19,7 @@ class DependentDropdownController extends Controller
 
     public function store(Request $request)
     {
-        $cities = City::where('province_id', $request->get('id'))
+        $cities = City::where('province_code', $request->get('id'))
             ->pluck('name', 'id');
 
         return response()->json($cities);
